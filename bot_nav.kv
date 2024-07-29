@@ -1,0 +1,298 @@
+#:import MapViev kivy_garden.mapview
+#:import MyMap main
+#:import MDBoxLayout kivymd.uix.boxlayout
+#:import Card kivymd.uix.card
+#:import MDTextField kivymd.uix.textfield
+
+<MDBottomNavigation>:
+    elevation:10
+    MDBottomNavigationItem:
+        name: 'news'
+        text: 'Новости'
+        icon: 'email'
+        BoxLayout:
+            orientation: 'vertical'
+
+            MDTopAppBar:
+                id: top_app_bar
+                title: "Новости"
+                specific_text_color: "black"
+                anchor_title: "left"
+                right_action_items: [["bell"]]
+                left_action_items: [["menu"]]
+
+
+            MDScrollView:
+                MDGridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: "12dp"
+                    padding: "12dp"
+                    adaptive_height: True
+
+                    MDCard:
+                        orientation: 'vertical'
+                        size_hint: None, None
+                        size: "430dp", "350dp"
+                        BoxLayout:
+                            orientation: 'vertical'
+                            Image:
+                                source: 'assests/im1.jpg'
+                                allow_stretch: True
+                                keep_ratio: True
+
+                            MDLabel:
+                                text: 'Запланирован субботник - ждем всех желающих'
+                                font_size: "24sp"
+                                bold: True
+                                size_hint_y: 0.2
+                    MDCard:
+                        orientation: 'vertical'
+                        size_hint: None, None
+                        size: "430dp", "350dp"
+                        BoxLayout:
+                            orientation: 'vertical'
+                            Image:
+                                source: 'assests/im7.jpg'
+                                allow_stretch: True
+                                keep_ratio: True
+
+                            MDLabel:
+                                text: 'Как происходит переработка'
+                                bold: True
+                                font_size: "24sp"
+                                size_hint_y: 0.2
+                    MDCard:
+                        orientation: 'vertical'
+                        size_hint: None, None
+                        size: "430dp", "350dp"
+                        BoxLayout:
+                            orientation: 'vertical'
+                            Image:
+                                source: 'assests/im4.jpg'
+                                allow_stretch: True
+                                keep_ratio: True
+
+                            MDLabel:
+                                text: 'Вторичное использование старых вещей.'
+                                bold: True
+                                font_size: "24sp"
+                                size_hint_y: 0.2
+                    MDCard:
+                        orientation: 'vertical'
+                        size_hint: None, None
+                        size: "430dp", "350dp"
+                        BoxLayout:
+                            orientation: 'vertical'
+                            Image:
+                                source: 'assests/im6.jpg'
+                                allow_stretch: True
+                                keep_ratio: True
+
+                            MDLabel:
+                                text: 'Как происходит переработка'
+                                bold: True
+                                font_size: "24sp"
+                                size_hint_y: 0.2
+
+
+
+    MDBottomNavigationItem:
+        name: 'maps'
+        text: 'Карта'
+        icon: 'map'
+        BoxLayout:
+            orientation: 'vertical'
+
+            MDTopAppBar:
+                id: top_app_bar
+                title: "Карта"
+                anchor_title: "left"
+                specific_text_color: "black"
+                elevation: 0
+                left_action_items: [["menu"]]
+                right_action_items: [["pin"]]
+
+            MyMap:
+                id: myscreen
+                zoom: 14
+
+        MDIconButton:
+            icon: "navigation"
+            text_color: 0, 0, 0, 1
+            pos_hint: {'center_x': 0.9, 'center_y': 0.1}
+
+        MDIconButton:
+            id: zoomin
+            icon: "magnify-plus"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            pos_hint: {'right': 0.95, 'top': 0.85}
+
+        MDIconButton:
+            id: zoomout
+            icon: "magnify-minus"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            pos_hint: {'right': 0.95, 'top': 0.75}
+
+
+
+    MDBottomNavigationItem:
+        name: 'help'
+
+        text: 'Поддержка'
+        icon: 'help'
+        Chat:
+
+    MDBottomNavigationItem:
+        name: 'profile'
+        text: 'Профиль'
+        icon: 'account-circle'
+        ProfileScreen
+
+
+
+
+<Chat@BoxLayout>:
+    padding: "10dp"
+    orientation: 'vertical'
+    MDTopAppBar:
+        id: top_app_bar
+        title: "Чат поддежки"
+        anchor_title: "left"
+        specific_text_color: "black"
+        elevation: 0
+        right_action_items: [["alert"]]
+        left_action_items: [["menu"]]
+
+    ScrollView:
+
+        do_scroll_x: False
+        size_hint_x: 0.9
+
+        BoxLayout:
+            id: message_display
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            padding: "10dp"
+            spacing: "10dp"
+
+    BoxLayout:
+        size_hint_y: 0.07
+        MDTextField:
+            id: message_input
+            mode: "fill"
+            icon_left: "magnify"
+            hint_text: "Напишите свое сообщение!"
+
+        MDIconButton:
+            icon: "email"
+            text_color: 0, 0, 0, 1
+            pos_hint: {'center_x': 0.9, 'center_y': 0.5}
+
+
+
+<ProfileScreen@BoxLayout>:
+    orientation: 'vertical'
+    spacing: "10dp"
+    padding: "10dp"
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDTopAppBar:
+        id: top_app_bar
+        title: "Профиль"
+        specific_text_color: "black"
+        elevation: 0
+        right_action_items: [["pencil"], ["logout"]]
+        left_action_items: [["menu"]]
+
+    Image:
+        source: 'assests/avatar.png'
+        size_hint_y: None
+        height: "200dp"
+        allow_stretch: True
+
+    Label:
+        text: 'Типичный чуваш'
+        font_size: "24sp"
+        color: 0, 0, 0, 1
+        size_hint_y: None
+        height: "22dp"
+        valign: 'bottom'
+    Label:
+        text: 'id: 8438294'
+        font_size: "16sp"
+        color: 0, 0, 0, 1
+        size_hint_y: None
+        height: "12dp"
+        valign: 'bottom'
+    Label:
+        text: '26 лет'
+        font_size: "16sp"
+        color: 0, 0, 0, 1
+        size_hint_y: None
+        height: "12dp"
+        valign: 'bottom'
+
+    GridLayout:
+
+        canvas.before:
+            Color:
+                rgba: 0.9, 0.9, 0.9, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        cols: 2
+        padding: "10dp"
+        spacing: "5dp"
+
+        Label:
+            text: 'Email:'
+            halign: 'left'
+            font_size: "18sp"
+            color: 0, 0, 0, 1
+
+        Label:
+            text: 'Sergey.doe@example.com'
+            halign: 'left'
+            font_size: "18sp"
+            color: 0, 0, 0, 1
+
+        Label:
+            text: 'Телефон:     '
+            font_size: "18sp"
+            color: 0, 0, 0, 1
+
+        Label:
+            text: '+7-800-555-35-35'
+            font_size: "18sp"
+            color: 0, 0, 0, 1
+
+        Label:
+            text: 'Имя пользоватя:'
+            font_size: "18sp"
+            color: 0, 0, 0, 1
+
+        Label:
+
+            text: 'Эколог Джо'
+            font_size: "18sp"
+            color: 0, 0, 0, 1
+
+        Label:
+            text: 'Социальный рейтинг:'
+            font_size: "18sp"
+            color: 0, 0, 0, 1
+
+        Label:
+            text: '4178 пунктов'
+            bold: True
+            font_size: "18sp"
+            color: 0, 0, 0, 1
